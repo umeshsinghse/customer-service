@@ -1,19 +1,128 @@
 version: 0.2
 
+# AWS CodeBuild buildspec for building and testing the customer-service
+# This file defines the build process for the Spring Boot application
+
+env:
+  variables:
+    JAVA_VERSION: "17"
+    MAVEN_VERSION: "3.8.6"
+    AWS_DEFAULT_REGION: us-east-1
+    AWS_ACCOUNT_ID: "123456789012"  # Replace with your AWS Account ID
+    ECR_REPOSITORY: customer-service
+  parameter-store:
+    # Store build-time configuration in AWS Systems Manager Parameter Store
+    SONAR_HOST_URL: /customer-service/build/sonar/host
+    SONAR_PROJECT_KEY: /customer-service/build/sonar/project-key
+  secrets-manager:
+    # Store sensitive build credentials in AWS Secrets Manager
+    SONAR_TOKEN: customer-service/build:sonar_token
+
 phases:
   install:
     runtime-versions:
       java: corretto17
+    commands:
+      - echo Install phase started on `date`
+      - echo Installing dependencies...
+      
   pre_build:
     commands:
-      - echo "Starting build..."
+      - echo Pre-build phase started on `date`
+      - echo Logging in to Amazon ECR...
+      - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com
+      - REPOSITORY_URI=$AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$ECR_REPOSITORY
+      - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
+      - IMAGE_TAG=${COMMIT_HASH:=latest}
+      - echo Repository URI is $REPOSITORY_URI
+      - echo Image tag is $IMAGE_TAG
+      
   build:
     commands:
-      - mvn clean package
+      - echo Build phase started on `date`
+      
+      # Clean and compile
+      - echo "Cleaning and compiling the application..."
+      - mvn clean compile
+      
+      # Run tests
+      - echo "Running unit tests..."
+      - mvn test
+      
+      # Package the application
+      - echo "Packaging the application..."
+      - mvn package -DskipTests
+      
+      # Optional: Run SonarQube analysis
+      - |
+        if [ ! -z "$SONAR_TOKEN" ] && [ ! -z "$SONAR_HOST_URL" ]; then
+          echo "Running SonarQube analysis..."
+          mvn sonar:sonar \
+            -Dsonar.projectKey=$SONAR_PROJECT_KEY \
+            -Dsonar.host.url=$SONAR_HOST_URL \
+            -Dsonar.login=$SONAR_TOKEN
+        else
+          echo "SonarQube analysis skipped - credentials not configured"
+        fi
+        
+      # Build Docker image
+      - echo "Building Docker image..."
+      - docker build -t $REPOSITORY_URI:latest .
+      - docker build -t $REPOSITORY_URI:$IMAGE_TAG .
+      
+      # Optional: Run container security scan
+      - |
+        echo "Running container security scan..."
+        # Example with Trivy (if installed)
+        # trivy image --exit-code 1 --severity HIGH,CRITICAL $REPOSITORY_URI:$IMAGE_TAG
+        
   post_build:
     commands:
-      - echo "Build completed"
-
+      - echo Post-build phase started on `date`
+      
+      # Push Docker images to ECR
+      - echo "Pushing Docker images to ECR..."
+      - docker push $REPOSITORY_URI:latest
+      - docker push $REPOSITORY_URI:$IMAGE_TAG
+      
+      # Generate build artifacts
+      - echo "Generating build artifacts..."
+      - |
+        # Create build info file
+        cat > build-info.json << EOF
+        {
+          "buildId": "$CODEBUILD_BUILD_ID",
+          "sourceVersion": "$CODEBUILD_RESOLVED_SOURCE_VERSION",
+          "imageTag": "$IMAGE_TAG",
+          "repositoryUri": "$REPOSITORY_URI",
+          "buildTime": "$(date -u +%Y-%m-%dT%H:%M:%SZ)",
+          "region": "$AWS_DEFAULT_REGION"
+        }
+        EOF
+        
+      - echo Build completed on `date`
+      
+reports:
+  surefire-reports:
+    files:
+      - "target/surefire-reports/*.xml"
+    file-format: JUNITXML
+    
+  # Optional: SonarQube reports
+  # sonarqube-reports:
+  #   files:
+  #     - "target/sonar/report-task.txt"
+  #   file-format: SONARQUBE
+    
 artifacts:
   files:
     - target/*.jar
+    - Dockerfile
+    - buildspec*.yml
+    - build-info.json
+  name: customer-service-build-artifacts
+  
+cache:
+  paths:
+    - '/root/.m2/**/*'
+    - 'target/**/*'
