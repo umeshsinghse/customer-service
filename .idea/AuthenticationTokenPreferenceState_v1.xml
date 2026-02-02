@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AuthenticationTokenPreferenceState">
+    <option name="authTokenMap">
+      <map>
+        <entry key="customer-service" value="eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6ImlrNldybzd6RmpuWndjTUY0NDNBTndXNEI0QkhzTGNOdUFldzBKaTktMFUifQ.eyJ0eXBlIjoiYXQiLCJjbGllbnRJZCI6ImI5N2ZiZWY3LWNhZDktNGU1Ni05ODUwLTM5ZTg2YzhmZGY2MSIsInJlcXVlc3RlZENsaWVudElkIjoiYjk3ZmJlZjctY2FkOS00ZTU2LTk4NTAtMzllODZjOGZkZjYxIiwiaWRwIjoibXNmdCIsImlzcyI6Imh0dHBzOi8vcHMuc2FwaWVudHNsaW5nc2hvdC5jb20iLCJyb2xlcyI6WyJzdXBlcl91c2VyIl0sImp0aSI6IktjaUZpcDRIMWYiLCJVc2VySW5mbyI6eyJpZCI6IjczNTZmMDI5LTU4OTQtNGNiMi1hYzg1LTg2YTRhNjdlOTJmNyIsImVtYWlsIjoidW1lc2luZ2gyQHB1YmxpY2lzZ3JvdXBlLm5ldCIsImRpc3BsYXlOYW1lIjoiVW1lc2ggU2luZ2gifSwiYXBwS2V5Ijoic2tfNzU3MzUzMjEyNGJhZiIsImFwcElkIjoiMWUwYWM3ZjItNDY2Mi00MjNkLTg2OGYtZDc5Yjk5NDVlOGNkIiwic2VydmljZXMiOlsibGxtIiwic3RhdGUiXSwiYXBwTmFtZSI6IlBTU2xpbmdzaG90IiwiaW5kdXN0cnkiOiI0NTNkOWZhZS1mNjNjLTRlOTQtODIxZS0wNzJkNDc0MDg5NmEiLCJpYXQiOjE3NzAwNDE4MjcsImV4cCI6MTc3MDA1MjYyN30.Y9Ax4aSV5e0A4dGiBivxkVE0aauA5q6noBPXzz6w5Wi5al_CkEpqWOSaW6HnIHUjNkKeHvlhH3mCW0YYKmOlmhkp5vDbG2YRZNrc5Wf2ZsBm_gZgqdDPZ0I2WE2DzHnOLISakEuYhF1Mm2T5qdWIgID47WKc1qq_D7rjeenC6_ba-YxgVfbJoFCQlvZxC8GEj_DzFCTD8zaXX8NCV6WckHNL5zgXFwI6c2BjATj7rO6a7BjEl736TWFUgtrWnaEk1rnRZNjB-qOHka_UPPNktuOLuVFze-yCcAvHDigNcuQ3elwvrFnKqJfeqZTz9qtggB6YLDFgGZ0jjMid-26qUQ" />
+      </map>
+    </option>
+    <option name="refreshTokenMap">
+      <map>
+        <entry key="customer-service" value="eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6ImlrNldybzd6RmpuWndjTUY0NDNBTndXNEI0QkhzTGNOdUFldzBKaTktMFUifQ.eyJ0eXBlIjoicnQiLCJjbGllbnRJZCI6ImI5N2ZiZWY3LWNhZDktNGU1Ni05ODUwLTM5ZTg2YzhmZGY2MSIsInJlcXVlc3RlZENsaWVudElkIjoiYjk3ZmJlZjctY2FkOS00ZTU2LTk4NTAtMzllODZjOGZkZjYxIiwiaWRwIjoibXNmdCIsImlzcyI6Imh0dHBzOi8vcHMuc2FwaWVudHNsaW5nc2hvdC5jb20iLCJyb2xlcyI6WyJzdXBlcl91c2VyIl0sImp0aSI6IlpSaTd5V2tsMUQiLCJVc2VySW5mbyI6eyJpZCI6IjczNTZmMDI5LTU4OTQtNGNiMi1hYzg1LTg2YTRhNjdlOTJmNyIsImVtYWlsIjoidW1lc2luZ2gyQHB1YmxpY2lzZ3JvdXBlLm5ldCIsImRpc3BsYXlOYW1lIjoiVW1lc2ggU2luZ2gifSwiYXBwS2V5Ijoic2tfNzU3MzUzMjEyNGJhZiIsImFwcElkIjoiMWUwYWM3ZjItNDY2Mi00MjNkLTg2OGYtZDc5Yjk5NDVlOGNkIiwic2VydmljZXMiOlsibGxtIiwic3RhdGUiXSwiYXBwTmFtZSI6IlBTU2xpbmdzaG90IiwiaW5kdXN0cnkiOiI0NTNkOWZhZS1mNjNjLTRlOTQtODIxZS0wNzJkNDc0MDg5NmEiLCJpYXQiOjE3NzAwNDE4MjcsImV4cCI6MTc3MDIxNDYyN30.Kva26j5F1fhZqyqorXR8ltc5sQPuHduVGrCqQrqUtNlNymwREUZ3e5X7FTfJMydkso5OruPRXCRhykR434LM9SgKUFn2SjgzqsFDieBosdRkLtT-8CWLwwnGYndm1gF3BUZvN_ZdfPUcHfhqT8UGlvinz-K8q3xAT8L0wf-gGj_MyeVKr4ZmlQIpl0by5pRSD1VR4zrh6MeTsTo8LkH_q71YSJS2rNk6XIvhsEsTicwhFvj2hFydMDUW4RPyut_a1yMsBhYi29iyUBgWUcTH_Rp-JzFdId0Bc6e__qLyWGVqfRmU_QPCBmaG0fuLRlZ34AzirHzucvLT7CVrpnE6bQ" />
+      </map>
+    </option>
+    <option name="timeWhenAuthTokenWasLastUpdated">
+      <map>
+        <entry key="customer-service" value="1770041826720" />
+      </map>
+    </option>
+    <option name="workSpaceIdMap">
+      <map>
+        <entry key="customer-service" value="6e5756eb-d7e2-4d80-ad07-9d7a51600d85" />
+      </map>
+    </option>
+    <option name="projectIdMap">
+      <map>
+        <entry key="customer-service" value="fa8121c4-e2fc-48f1-9478-8949c04e13cc" />
+      </map>
+    </option>
+    <option name="clientIdMap">
+      <map>
+        <entry key="customer-service" value="b97fbef7-cad9-4e56-9850-39e86c8fdf61" />
+      </map>
+    </option>
+  </component>
+</project>

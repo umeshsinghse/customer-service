@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="SymbolSearchPersistentStateComponent">
+    <option name="entries">
+      <map>
+        <entry key="$PROJECT_DIR$/src/main/java/com/example/customer/Customer.java">
+          <value>
+            <FileEntry>
+              <option name="meta">
+                <FileMeta>
+                  <option name="timeStamp" value="1769877058552" />
+                  <option name="hash" value="1447144020" />
+                </FileMeta>
+              </option>
+              <option name="records">
+                <list>
+                  <SymbolRecordBean>
+                    <option name="name" value="Customer" />
+                    <option name="kind" value="CLASS" />
+                    <option name="filePath" value="$PROJECT_DIR$/src/main/java/com/example/customer/Customer.java" />
+                    <option name="startLine" value="8" />
+                    <option name="endLine" value="56" />
+                    <option name="endCharacter" value="1" />
+                    <option name="language" value="java" />
+                  </SymbolRecordBean>
+                  <SymbolRecordBean>
+                    <option name="name" value="id" />
+                    <option name="kind" value="VARIABLE" />
+                    <option name="filePath" value="$PROJECT_DIR$/src/main/java/com/example/customer/Customer.java" />
+                    <option name="startLine" value="9" />
+                    <option name="startCharacter" value="17" />
+                    <option name="endLine" value="9" />
+                    <option name="endCharacter" value="19" />
+                    <option name="language" value="java" />
+                  </SymbolRecordBean>
+                  <SymbolRecordBean>
+                    <option name="name" value="name" />
+                    <option name="kind" value="VARIABLE" />
+                    <option name="filePath" value="$PROJECT_DIR$/src/main/java/com/example/customer/Customer.java" />
+                    <option name="startLine" value="10" />
+                    <option name="startCharacter" value="19" />
+                    <option name="endLine" value="10" />
+                    <option name="endCharacter" value="23" />
+                    <option name="language" value="java" />
+                  </SymbolRecordBean>
+                  <SymbolRecordBean>
+                    <option name="name" value="email" />
+                    <option name="kind" value="VARIABLE" />
+                    <option name="filePath" value="$PROJECT_DIR$/src/main/java/com/example/customer/Customer.java" />
+                    <option name="startLine" value="11" />
+                    <option name="startCharacter" value="19" />
+                    <option name="endLine" value="11" />
+                    <option name="endCharacter" value="24" />
+                    <option name="language" value="java" />
+                  </SymbolRecordBean>
+                  <SymbolRecordBean>
+                    <option name="name" value="Customer" />
+                    <option name="kind" value="CONSTRUCTOR" />
+                    <option name="filePath" value="$PROJECT_DIR$/src/main/java/com/example/customer/Customer.java" />
+                    <option name="startLine" value="14" />
+                    <option name="startCharacter" value="4" />
+                    <option name="endLine" value="14" />
+                    <option name="endCharacter" value="24" />
+                    <option name="language" value="java" />
+                  </SymbolRecordBean>
+                  <SymbolRecordBean>
+                    <option name="name" value="Customer" />
+                    <option name="kind" value="CONSTRUCTOR" />
+                    <option name="filePath" value="$PROJECT_DIR$/src/main/java/com/example/customer/Customer.java" />
+                    <option name="startLine" value="17" />
+                    <option name="startCharacter" value="4" />
+                    <option name="endLine" value="21" />
+                    <option name="endCharacter" value="5" />
+                    <option name="language" value="java" />
+                  </SymbolRecordBean>
+                  <SymbolRecordBean>
+                    <option name="name" value="getId" />
+                    <option name="kind" value="METHOD" />
+                    <option name="filePath" value="$PROJECT_DIR$/src/main/java/com/example/customer/Customer.java" />
+                    <option name="startLine" value="24" />
+                    <option name="startCharacter" value="4" />
+                    <option name="endLine" value="26" />
+                    <option name="endCharacter" value="5" />
+                    <option name="language" value="java" />
+                  </SymbolRecordBean>
+                  <SymbolRecordBean>
+                    <option name="name" value="setId" />
+                    <option name="kind" value="METHOD" />
+                    <option name="filePath" value="$PROJECT_DIR$/src/main/java/com/example/customer/Customer.java" />
+                    <option name="startLine" value="28" />
+                    <option name="startCharacter" value="4" />
+                    <option name="endLine" value="30" />
+                    <option name="endCharacter" value="5" />
+                    <option name="language" value="java" />
+                  </SymbolRecordBean>
+                  <SymbolRecordBean>
+                    <option name="name" value="getName" />
+                    <option name="kind" value="METHOD" />
+                    <option name="filePath" value="$PROJECT_DIR$/src/main/java/com/example/customer/Customer.java" />
+                    <option name="startLine" value="32" />
+                    <option name="startCharacter" value="4" />
+                    <option name="endLine" value="34" />
+                    <option name="endCharacter" value="5" />
+                    <option name="language" value="java" />
+                  </SymbolRecordBean>
+                  <SymbolRecordBean>
+                    <option name="name" value="setName" />
+                    <option name="kind" value="METHOD" />
+                    <option name="filePath" value="$PROJECT_DIR$/src/main/java/com/example/customer/Customer.java" />
+                    <option name="startLine" value="36" />
+                    <option name="startCharacter" value="4" />
+                    <option name="endLine" value="38" />
+                    <option name="endCharacter" value="5" />
+                    <option name="language" value="java" />
+                  </SymbolRecordBean>
+                  <SymbolRecordBean>
+                    <option name="name" value="getEmail" />
+                    <option name="kind" value="METHOD" />
+                    <option name="filePath" value="$PROJECT_DIR$/src/main/java/com/example/customer/Customer.java" />
+                    <option name="startLine" value="40" />
+                    <option name="startCharacter" value="4" />
+                    <option name="endLine" value="42" />
+                    <option name="endCharacter" value="5" />
+                    <option name="language" value="java" />
+                  </SymbolRecordBean>
+                  <SymbolRecordBean>
+                    <option name="name" value="setEmail" />
+                    <option name="kind" value="METHOD" />
+                    <option name="filePath" value="$PROJECT_DIR$/src/main/java/com/example/customer/Customer.java" />
+                    <option name="startLine" value="44" />
+                    <option name="startCharacter" value="4" />
+                    <option name="endLine" value="46" />
+                    <option name="endCharacter" value="5" />
+                    <option name="language" value="java" />
+                  </SymbolRecordBean>
+                  <SymbolRecordBean>
+                    <option name="name" value="toString" />
+                    <option name="kind" value="METHOD" />
+                    <option name="filePath" value="$PROJECT_DIR$/src/main/java/com/example/customer/Customer.java" />
+                    <option name="startLine" value="48" />
+                    <option name="startCharacter" value="4" />
+                    <option name="endLine" value="55" />
+                    <option name="endCharacter" value="5" />
+                    <option name="language" value="java" />
+                  </SymbolRecordBean>
+                </list>
+              </option>
+            </FileEntry>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/com/example/customer/CustomerApplication.java">
+          <value>
+            <FileEntry>
+              <option name="meta">
+                <FileMeta>
+                  <option name="timeStamp" value="1769877047318" />
+                  <option name="hash" value="-1941609162" />
+                </FileMeta>
+              </option>
+              <option name="records">
+                <list>
+                  <SymbolRecordBean>
+                    <option name="name" value="CustomerApplication" />
+                    <option name="kind" value="CLASS" />
+                    <option name="filePath" value="$PROJECT_DIR$/src/main/java/com/example/customer/CustomerApplication.java" />
+                    <option name="startLine" value="10" />
+                    <option name="endLine" value="16" />
+                    <option name="endCharacter" value="1" />
+                    <option name="language" value="java" />
+                  </SymbolRecordBean>
+                  <SymbolRecordBean>
+                    <option name="name" value="main" />
+                    <option name="kind" value="METHOD" />
+                    <option name="filePath" value="$PROJECT_DIR$/src/main/java/com/example/customer/CustomerApplication.java" />
+                    <option name="startLine" value="13" />
+                    <option name="startCharacter" value="4" />
+                    <option name="endLine" value="15" />
+                    <option name="endCharacter" value="5" />
+                    <option name="language" value="java" />
+                  </SymbolRecordBean>
+                </list>
+              </option>
+            </FileEntry>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/com/example/customer/CustomerController.java">
+          <value>
+            <FileEntry>
+              <option name="meta">
+                <FileMeta>
+                  <option name="timeStamp" value="1769877088781" />
+                  <option name="hash" value="363656230" />
+                </FileMeta>
+              </option>
+              <option name="records">
+                <list>
+                  <SymbolRecordBean>
+                    <option name="name" value="CustomerController" />
+                    <option name="kind" value="CLASS" />
+                    <option name="filePath" value="$PROJECT_DIR$/src/main/java/com/example/customer/CustomerController.java" />
+                    <option name="startLine" value="14" />
+                    <option name="endLine" value="46" />
+                    <option name="endCharacter" value="1" />
+                    <option name="language" value="java" />
+                  </SymbolRecordBean>
+                  <SymbolRecordBean>
+                    <option name="name" value="customerService" />
+                    <option name="kind" value="VARIABLE" />
+                    <option name="filePath" value="$PROJECT_DIR$/src/main/java/com/example/customer/CustomerController.java" />
+                    <option name="startLine" value="19" />
+                    <option name="startCharacter" value="28" />
+                    <option name="endLine" value="19" />
+                    <option name="endCharacter" value="43" />
+                    <option name="language" value="java" />
+                  </SymbolRecordBean>
+                  <SymbolRecordBean>
+                    <option name="name" value="getAllCustomers" />
+                    <option name="kind" value="METHOD" />
+                    <option name="filePath" value="$PROJECT_DIR$/src/main/java/com/example/customer/CustomerController.java" />
+                    <option name="startLine" value="24" />
+                    <option name="startCharacter" value="4" />
+                    <option name="endLine" value="27" />
+                    <option name="endCharacter" value="5" />
+                    <option name="language" value="java" />
+                  </SymbolRecordBean>
+                  <SymbolRecordBean>
+                    <option name="name" value="getCustomerById" />
+                    <option name="kind" value="METHOD" />
+                    <option name="filePath" value="$PROJECT_DIR$/src/main/java/com/example/customer/CustomerController.java" />
+                    <option name="startLine" value="32" />
+                    <option name="startCharacter" value="4" />
+                    <option name="endLine" value="37" />
+                    <option name="endCharacter" value="5" />
+                    <option name="language" value="java" />
+                  </SymbolRecordBean>
+                  <SymbolRecordBean>
+                    <option name="name" value="health" />
+                    <option name="kind" value="METHOD" />
+                    <option name="filePath" value="$PROJECT_DIR$/src/main/java/com/example/customer/CustomerController.java" />
+                    <option name="startLine" value="42" />
+                    <option name="startCharacter" value="4" />
+                    <option name="endLine" value="45" />
+                    <option name="endCharacter" value="5" />
+                    <option name="language" value="java" />
+                  </SymbolRecordBean>
+                </list>
+              </option>
+            </FileEntry>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/com/example/customer/CustomerService.java">
+          <value>
+            <FileEntry>
+              <option name="meta">
+                <FileMeta>
+                  <option name="timeStamp" value="1769877069993" />
+                  <option name="hash" value="-1681665451" />
+                </FileMeta>
+              </option>
+              <option name="records">
+                <list>
+                  <SymbolRecordBean>
+                    <option name="name" value="CustomerService" />
+                    <option name="kind" value="CLASS" />
+                    <option name="filePath" value="$PROJECT_DIR$/src/main/java/com/example/customer/CustomerService.java" />
+                    <option name="startLine" value="13" />
+                    <option name="endLine" value="41" />
+                    <option name="endCharacter" value="1" />
+                    <option name="language" value="java" />
+                  </SymbolRecordBean>
+                  <SymbolRecordBean>
+                    <option name="name" value="customers" />
+                    <option name="kind" value="VARIABLE" />
+                    <option name="filePath" value="$PROJECT_DIR$/src/main/java/com/example/customer/CustomerService.java" />
+                    <option name="startLine" value="17" />
+                    <option name="startCharacter" value="33" />
+                    <option name="endLine" value="21" />
+                    <option name="endCharacter" value="5" />
+                    <option name="language" value="java" />
+                  </SymbolRecordBean>
+                  <SymbolRecordBean>
+                    <option name="name" value="getAllCustomers" />
+                    <option name="kind" value="METHOD" />
+                    <option name="filePath" value="$PROJECT_DIR$/src/main/java/com/example/customer/CustomerService.java" />
+                    <option name="startLine" value="27" />
+                    <option name="startCharacter" value="4" />
+                    <option name="endLine" value="29" />
+                    <option name="endCharacter" value="5" />
+                    <option name="language" value="java" />
+                  </SymbolRecordBean>
+                  <SymbolRecordBean>
+                    <option name="name" value="getCustomerById" />
+                    <option name="kind" value="METHOD" />
+                    <option name="filePath" value="$PROJECT_DIR$/src/main/java/com/example/customer/CustomerService.java" />
+                    <option name="startLine" value="36" />
+                    <option name="startCharacter" value="4" />
+                    <option name="endLine" value="40" />
+                    <option name="endCharacter" value="5" />
+                    <option name="language" value="java" />
+                  </SymbolRecordBean>
+                </list>
+              </option>
+            </FileEntry>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>
