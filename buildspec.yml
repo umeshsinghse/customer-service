@@ -51,11 +51,11 @@ phases:
       - echo "Build status: $CODEBUILD_BUILD_SUCCEEDING"
       - |
         if [ "$CODEBUILD_BUILD_SUCCEEDING" = "1" ]; then
-          echo "✅ Build succeeded!"
+          echo "Build succeeded!"
           echo "JAR file details:"
           ls -lh target/*.jar
         else
-          echo "❌ Build failed!"
+          echo "Build failed!"
           echo "Check logs above for errors"
         fi
       - echo "Cleaning up temporary files..."
