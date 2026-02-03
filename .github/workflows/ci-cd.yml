@@ -250,8 +250,8 @@ jobs:
           echo "Cluster information:"
           kubectl cluster-info
           
-          echo "Cluster version:"
-          kubectl version --short
+  echo "Cluster version:"
+  kubectl version --client
           
           echo "EKS connection verified successfully"
 
