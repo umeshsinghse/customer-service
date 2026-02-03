@@ -1,0 +1,38 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: customer-service-config
+  labels:
+    app: customer-service
+data:
+  # Application properties for Spring Boot
+  SPRING_APPLICATION_NAME: "customer-service"
+  MANAGEMENT_ENDPOINTS_WEB_EXPOSURE_INCLUDE: "health,info,metrics,prometheus"
+  MANAGEMENT_ENDPOINT_HEALTH_SHOW_DETAILS: "always"
+  MANAGEMENT_ENDPOINT_HEALTH_PROBES_ENABLED: "true"
+  MANAGEMENT_HEALTH_LIVENESSSTATE_ENABLED: "true"
+  MANAGEMENT_HEALTH_READINESSSTATE_ENABLED: "true"
+  LOGGING_LEVEL_COM_EXAMPLE_CUSTOMER: "INFO"
+  LOGGING_LEVEL_ROOT: "WARN"
+
+  # Additional Spring Boot configuration
+  application.properties: |
+    # Server configuration
+    server.port=8080
+    server.shutdown=graceful
+    spring.lifecycle.timeout-per-shutdown-phase=30s
+    # Application name
+    spring.application.name=customer-service
+    # Actuator configuration for health checks
+    management.endpoints.web.exposure.include=health,info,metrics,prometheus
+    management.endpoint.health.show-details=always
+    management.endpoint.health.probes.enabled=true
+    management.health.livenessstate.enabled=true
+    management.health.readinessstate.enabled=true
+    # Logging configuration
+    logging.level.com.example.customer=INFO
+    logging.level.root=WARN
+    logging.pattern.console=%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n
+    # JVM and performance tuning
+    spring.jpa.open-in-view=false
+    spring.jpa.show-sql=false
