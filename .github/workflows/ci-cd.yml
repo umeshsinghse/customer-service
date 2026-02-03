@@ -2,7 +2,7 @@ name: CI/CD Pipeline with EKS Deployment
 
 on:
   push:
-    branches: [ main, develop ]
+    branches: [ main ]
   pull_request:
     branches: [ main ]
 
