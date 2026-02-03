@@ -36,10 +36,6 @@ phases:
 
   build:
     commands:
-      - echo "=== BUILD PHASE STARTED ==="
-      - echo "Starting build process at $(date)"
-      - echo "Step 1: Running tests..."
-      - mvn clean test
       - echo "Step 2: Compiling application..."
       - mvn compile
       - echo "Step 3: Packaging JAR..."
