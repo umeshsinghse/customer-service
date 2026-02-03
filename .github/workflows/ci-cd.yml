@@ -220,8 +220,7 @@ jobs:
           echo "Kubeconfig updated successfully"
 
       - name: Verify EKS connection
-        run:
-
+        run: |
           echo "=== VERIFYING EKS CONNECTION ==="
           
           # Test basic kubectl connectivity with retries
@@ -251,8 +250,8 @@ jobs:
           echo "Cluster information:"
           kubectl cluster-info
           
-  echo "Cluster version:"
-  kubectl version --client
+          echo "Cluster version:"
+          kubectl version --client
           
           echo "EKS connection verified successfully"
 
