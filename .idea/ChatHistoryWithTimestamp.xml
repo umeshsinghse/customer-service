@@ -5,7 +5,18 @@
       <map>
         <entry key="DEFAULT">
           <value>
-            <list />
+            <list>
+              <ChatHistoryWithTimestamp>
+                <option name="message" value="### Kubernetes Deployment Timeout Analysis&#10;&#10;**Issue Summary:**&#10;- Kubernetes deployment `customer-service-deployment` failed to complete rollout within timeout period&#10;- Deployment was stuck updating replicas (fluctuating between 0/3 and 2/3 updated)&#10;- Service configuration remained unchanged but pods failed to reach ready state&#10;&#10;**Root Cause Analysis:**&#10;The deployment timeout indicates pods are failing readiness/liveness probes or experiencing resource constraints. Common causes include:&#10;- Container image pull failures or startup crashes&#10;- Insufficient CPU/memory resources&#10;- Failed health check endpoints&#10;- Network connectivity issues&#10;- Configuration errors in deployment manifest&#10;&#10;**Troubleshooting Steps Performed:**&#10;1. Applied deployment configuration successfully&#10;2. Monitored rollout progress showing inconsistent replica updates&#10;3. Deployment timed out after multiple retry attempts&#10;4. Process terminated with exit code 1&#10;&#10;**Next Actions Required:**&#10;- Check pod logs and events for specific error details&#10;- Verify resource quotas and node capacity&#10;- Validate container image availability and health check endpoints&#10;- Review deployment manifest for configuration issues" />
+                <option name="role" value="assistant" />
+                <option name="timestamp" value="2026-02-03T15:38:55.737738700Z" />
+              </ChatHistoryWithTimestamp>
+              <ChatHistoryWithTimestamp>
+                <option name="message" value="{&quot;additional_inference_data&quot;:[{&quot;programming_language&quot;:&quot;kubernetes&quot;,&quot;content&quot;:&quot;deployment.apps/customer-service-deployment configured\nservice/customer-service-service unchanged\nWaiting for deployment to be ready...\nWaiting for deployment \&quot;customer-service-deployment\&quot; rollout to finish: 2 out of 3 new replicas have been updated...\nWaiting for deployment spec update to be observed...\nWaiting for deployment spec update to be observed...\nWaiting for deployment \&quot;customer-service-deployment\&quot; rollout to finish: 0 out of 3 new replicas have been updated...\nWaiting for deployment \&quot;customer-service-deployment\&quot; rollout to finish: 0 out of 3 new replicas have been updated...\nWaiting for deployment \&quot;customer-service-deployment\&quot; rollout to finish: 0 out of 3 new replicas have been updated...\nWaiting for deployment \&quot;customer-service-deployment\&quot; rollout to finish: 2 out of 3 new replicas have been updated...\nerror: timed out waiting for the condition\nError: Process completed with exit code 1.&quot;}],&quot;query&quot;:&quot;Kubernetes deployment rollout failed with timeout error during customer-service-deployment update&quot;}" />
+                <option name="role" value="user" />
+                <option name="timestamp" value="2026-02-03T15:38:55.737738700Z" />
+              </ChatHistoryWithTimestamp>
+            </list>
           </value>
         </entry>
       </map>

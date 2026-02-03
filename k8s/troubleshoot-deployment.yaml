@@ -1,25 +1,23 @@
+# Troubleshooting Deployment Configuration
+# This file contains a simplified deployment for debugging purposes
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: customer-service-deployment
+  name: customer-service-debug
   labels:
-    app: customer-service
-    version: v1
+    app: customer-service-debug
 spec:
-  replicas: 3
+  replicas: 1
   strategy:
-    type: RollingUpdate
-    rollingUpdate:
-      maxSurge: 1
-      maxUnavailable: 0
+    type: Recreate
   selector:
     matchLabels:
-      app: customer-service
+      app: customer-service-debug
   template:
     metadata:
       labels:
-        app: customer-service
-        version: v1
+        app: customer-service-debug
     spec:
       containers:
         - name: customer-service
@@ -32,6 +30,8 @@ spec:
               value: "production"
             - name: SERVER_PORT
               value: "8080"
+            - name: JAVA_OPTS
+              value: "-Xms256m -Xmx512m -XX:+UseG1GC"
           envFrom:
             - configMapRef:
                 name: customer-service-config
@@ -42,42 +42,44 @@ spec:
             limits:
               memory: "1Gi"
               cpu: "1000m"
+          # Simplified probes for debugging
           livenessProbe:
             httpGet:
-              path: /actuator/health/liveness
+              path: /api/health
+              port: 8080
+            initialDelaySeconds: 180
+            periodSeconds: 30
+            timeoutSeconds: 10
+            failureThreshold: 3
+          readinessProbe:
+            httpGet:
+              path: /api/health
               port: 8080
             initialDelaySeconds: 120
             periodSeconds: 15
-            timeoutSeconds: 10
-            failureThreshold: 5
-          readinessProbe:
-            httpGet:
-              path: /actuator/health/readiness
-              port: 8080
-            initialDelaySeconds: 60
-            periodSeconds: 10
             timeoutSeconds: 5
-            failureThreshold: 5
+            failureThreshold: 3
+          # Extended startup probe
           startupProbe:
             httpGet:
-              path: /actuator/health
+              path: /api/health
               port: 8080
-            initialDelaySeconds: 30
-            periodSeconds: 15
+            initialDelaySeconds: 60
+            periodSeconds: 20
             timeoutSeconds: 10
-            failureThreshold: 40
+            failureThreshold: 60  # 20 minutes total
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: customer-service-service
+  name: customer-service-debug-service
   labels:
-    app: customer-service
+    app: customer-service-debug
 spec:
-  type: LoadBalancer
+  type: ClusterIP
   ports:
   - port: 80
     targetPort: 8080
     protocol: TCP
   selector:
-    app: customer-service
+    app: customer-service-debug

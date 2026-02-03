@@ -3,6 +3,24 @@
   <component name="FileNameToPathState">
     <option name="fileNameToPathMap">
       <map>
+        <entry key="k8s/configmap.yaml Lines(1-38)">
+          <value>
+            <list>
+              <option value="$PROJECT_DIR$/k8s/configmap.yaml" />
+            </list>
+          </value>
+        </entry>
+        <entry key="k8s/deployment.yaml Lines(1-83)">
+          <value>
+            <list>
+              <option value="$PROJECT_DIR$/k8s/deployment.yaml" />
+              <option value="$PROJECT_DIR$/k8s/deployment.yaml" />
+              <option value="$PROJECT_DIR$/k8s/deployment.yaml" />
+              <option value="$PROJECT_DIR$/k8s/deployment.yaml" />
+              <option value="$PROJECT_DIR$/k8s/deployment.yaml" />
+            </list>
+          </value>
+        </entry>
         <entry key="workflows/ci-cd.yml Lines(1-243)">
           <value>
             <list>

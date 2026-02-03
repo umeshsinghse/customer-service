@@ -10,5 +10,5 @@ COPY target/*.jar customer-service.jar
 # Expose port
 EXPOSE 8080
 
-# Run the application
-ENTRYPOINT ["java","-jar","/app/customer-service.jar"]
+# Run the application with JVM optimizations
+ENTRYPOINT ["java","-Xms256m","-Xmx512m","-XX:+UseG1GC","-XX:MaxGCPauseMillis=200","-Djava.security.egd=file:/dev/./urandom","-jar","/app/customer-service.jar"]

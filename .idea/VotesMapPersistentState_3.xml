@@ -31,6 +31,13 @@
             </VoteCacheDTO>
           </value>
         </entry>
+        <entry key="5876c01b-1751-4d3d-a8d6-adb0e830d501">
+          <value>
+            <VoteCacheDTO>
+              <option name="voteTime" value="2026-02-03T15:38:55.744740500Z" />
+            </VoteCacheDTO>
+          </value>
+        </entry>
         <entry key="5cdeb8b1-9a08-40ad-87dd-2be384fe85e7">
           <value>
             <VoteCacheDTO>
@@ -45,6 +52,13 @@
             </VoteCacheDTO>
           </value>
         </entry>
+        <entry key="8741baee-4559-484c-852c-a478ed5a49d8">
+          <value>
+            <VoteCacheDTO>
+              <option name="voteTime" value="2026-02-03T15:39:15.674403300Z" />
+            </VoteCacheDTO>
+          </value>
+        </entry>
         <entry key="bb20d253-9816-4016-a367-88766cbd8ccd">
           <value>
             <VoteCacheDTO>
@@ -56,6 +70,13 @@
           <value>
             <VoteCacheDTO>
               <option name="voteTime" value="2026-02-03T06:40:18.783537100Z" />
+            </VoteCacheDTO>
+          </value>
+        </entry>
+        <entry key="ce6a3853-90f8-4283-bc20-ee38dff18383">
+          <value>
+            <VoteCacheDTO>
+              <option name="voteTime" value="2026-02-03T15:27:07.809819400Z" />
             </VoteCacheDTO>
           </value>
         </entry>
