@@ -3,7 +3,7 @@
 FROM eclipse-temurin:17-jdk
 
 # Copy the JAR file
-COPY target/*.jar app.jar
+COPY target/*.jar customer-service.jar
 
 # Run the application
-ENTRYPOINT ["java","-jar","/app.jar"]
+ENTRYPOINT ["java","-jar","/customer-service.jar"]
