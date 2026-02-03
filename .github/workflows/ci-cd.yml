@@ -148,19 +148,152 @@ jobs:
         with:
           version: 'v1.29.0'
 
+      - name: Wait for EKS cluster to be ready
+        run: |
+          echo "=== WAITING FOR EKS CLUSTER ==="
+          echo "Checking cluster status..."
+          
+          # Check if cluster exists first
+          if ! aws eks describe-cluster --region ${{ env.AWS_REGION }} --name ${{ env.EKS_CLUSTER_NAME }} &>/dev/null; then
+            echo "EKS cluster '${{ env.EKS_CLUSTER_NAME }}' not found in region ${{ env.AWS_REGION }}"
+            echo "Please ensure the cluster exists before running this workflow"
+            exit 1
+          fi
+          
+          # Get initial status
+          CLUSTER_STATUS=$(aws eks describe-cluster --region ${{ env.AWS_REGION }} --name ${{ env.EKS_CLUSTER_NAME }} --query "cluster.status" --output text)
+          echo "Initial cluster status: $CLUSTER_STATUS"
+          
+          # If cluster is CREATING, wait for it to become ACTIVE (max 30 minutes)
+          if [ "$CLUSTER_STATUS" = "CREATING" ]; then
+            echo "Cluster is being created. Waiting for it to become ACTIVE..."
+            echo "This may take 15-20 minutes for a new cluster"
+          
+            timeout 1800 bash -c 'while true; do
+              STATUS=$(aws eks describe-cluster --region ${{ env.AWS_REGION }} --name ${{ env.EKS_CLUSTER_NAME }} --query "cluster.status" --output text)
+              echo "$(date): Cluster status is $STATUS"
+              if [ "$STATUS" = "ACTIVE" ]; then
+                break
+              elif [ "$STATUS" = "FAILED" ] || [ "$STATUS" = "DELETING" ]; then
+                echo "Cluster creation failed or cluster is being deleted. Status: $STATUS"
+                exit 1
+              fi
+              sleep 60
+            done'
+          
+            CLUSTER_STATUS=$(aws eks describe-cluster --region ${{ env.AWS_REGION }} --name ${{ env.EKS_CLUSTER_NAME }} --query "cluster.status" --output text)
+          fi
+          
+          # Final status check
+          if [ "$CLUSTER_STATUS" != "ACTIVE" ]; then
+            echo "Cannot proceed with deployment until cluster is ACTIVE"
+            exit 1
+          fi
+          
+          echo "EKS cluster is ACTIVE and ready for deployment"
+          
+          # Display cluster information
+          echo "Cluster details:"
+          aws eks describe-cluster --region ${{ env.AWS_REGION }} --name ${{ env.EKS_CLUSTER_NAME }} --query "cluster.{Name:name,Status:status,Version:version,Endpoint:endpoint}" --output table
+
       - name: Update kubeconfig for EKS
         run: |
           echo "=== CONFIGURING EKS ACCESS ==="
-          aws eks update-kubeconfig --region ${{ env.AWS_REGION }} --name ${{ env.EKS_CLUSTER_NAME }}
+          
+          # Double-check cluster is still ACTIVE before configuring kubeconfig
+          CLUSTER_STATUS=$(aws eks describe-cluster --region ${{ env.AWS_REGION }} --name ${{ env.EKS_CLUSTER_NAME }} --query "cluster.status" --output text)
+          echo "Current cluster status: $CLUSTER_STATUS"
+          
+          if [ "$CLUSTER_STATUS" != "ACTIVE" ]; then
+            echo " Cluster status is $CLUSTER_STATUS, cannot configure kubeconfig"
+            exit 1
+          fi
+          
+          # Update kubeconfig
+          echo "Updating kubeconfig for cluster ${{ env.EKS_CLUSTER_NAME }}..."
+          aws eks update-kubeconfig --region ${{ env.AWS_REGION }} --name ${{ env.EKS_CLUSTER_NAME }} --verbose
+          
+          # Verify kubeconfig was updated
+          echo "Kubeconfig context:"
+          kubectl config current-context
+          
           echo "Kubeconfig updated successfully"
 
       - name: Verify EKS connection
         run: |
           echo "=== VERIFYING EKS CONNECTION ==="
+          
+          # Test basic kubectl connectivity with retries
+          echo "Testing kubectl connectivity..."
+          RETRY_COUNT=0
+          MAX_RETRIES=30
+          
+          while [ $RETRY_COUNT -lt $MAX_RETRIES ]; do
+            if kubectl cluster-info &>/dev/null; then
+              echo "kubectl connection successful"
+              break
+            else
+              RETRY_COUNT=$((RETRY_COUNT + 1))
+              echo "Attempt $RETRY_COUNT/$MAX_RETRIES: Waiting for kubectl connection..."
+              sleep 10
+            fi
+          done
+          
+          if [ $RETRY_COUNT -eq $MAX_RETRIES ]; then
+            echo " Failed to connect to EKS cluster after $MAX_RETRIES attempts"
+            echo "Cluster info debug:"
+            kubectl cluster-info dump --output-directory=/tmp/cluster-debug || true
+            exit 1
+          fi
+          
+          # Display cluster information
+          echo "Cluster information:"
           kubectl cluster-info
-          echo "Cluster nodes:"
+          
+          echo "Cluster version:"
+          kubectl version --short
+          
+          echo "EKS connection verified successfully"
+
+      - name: Wait for node readiness
+        run: |
+          echo "=== WAITING FOR NODES ==="
+          echo "Checking for worker nodes..."
+          
+          # Check if any nodes exist
+          NODE_COUNT=$(kubectl get nodes --no-headers 2>/dev/null | wc -l || echo "0")
+          echo "Found $NODE_COUNT node(s)"
+          
+          if [ "$NODE_COUNT" -eq 0 ]; then
+            echo " No worker nodes found. This may indicate:"
+            echo "  1. Node group is still being created"
+            echo "  2. Node group failed to create"
+            echo "  3. Nodes are not joining the cluster"
+            echo "Waiting for nodes to appear..."
+          
+            # Wait for nodes to appear (max 15 minutes)
+            timeout 900 bash -c 'until [ $(kubectl get nodes --no-headers 2>/dev/null | wc -l) -gt 0 ]; do echo "$(date): Still waiting for nodes to appear..."; sleep 30; done'
+          fi
+          
+          # Wait for at least one node to be Ready
+          echo "Waiting for nodes to be Ready..."
+          timeout 600 bash -c 'until kubectl get nodes --no-headers | grep -q "Ready"; do
+            echo "$(date): Node status:"
+            kubectl get nodes --no-headers || echo "No nodes available yet"
+            sleep 15
+          done'
+          
+          # Display final node status
+          echo " Node readiness check completed"
+          echo "Final node status:"
           kubectl get nodes -o wide
-          echo " EKS connection verified"
+          
+          # Check for any NotReady nodes
+          NOT_READY=$(kubectl get nodes --no-headers | grep -v "Ready" | grep -c "NotReady" || echo "0")
+          if [ "$NOT_READY" -gt 0 ]; then
+            echo "Warning: $NOT_READY node(s) are NotReady"
+            kubectl describe nodes | grep -A 10 -B 5 "NotReady" || true
+          fi
 
       - name: Create namespace if not exists
         run: |
@@ -184,24 +317,41 @@ jobs:
           echo "Image URI: $IMAGE_URI"
           echo "Image Tag: $IMAGE_TAG"
           
-          # Replace placeholder in deployment.yaml with actual image URI
-          sed -i "s|ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/customer-service:latest|$IMAGE_URI|g" k8s/deployment.yaml
+          # Validate image URI
+          if [ -z "$IMAGE_URI" ]; then
+            echo "IMAGE_URI is empty"
+            exit 1
+          fi
+          
+          # Create a copy of deployment.yaml and replace image URI
+          cp k8s/deployment.yaml k8s/deployment-temp.yaml
+          sed -i "s|ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/customer-service:latest|$IMAGE_URI|g" k8s/deployment-temp.yaml
+          
+          echo "Deployment configuration:"
+          grep -A 5 -B 5 "image:" k8s/deployment-temp.yaml
           
           # Apply deployment and service
-          kubectl apply -f k8s/deployment.yaml -n ${{ env.KUBE_NAMESPACE }}
+          kubectl apply -f k8s/deployment-temp.yaml -n ${{ env.KUBE_NAMESPACE }}
           
-          # Wait for deployment to be ready
+          # Wait for deployment to be ready with extended timeout
           echo "Waiting for deployment to be ready..."
-          kubectl rollout status deployment/customer-service-deployment -n ${{ env.KUBE_NAMESPACE }} --timeout=300s
+          kubectl rollout status deployment/customer-service-deployment -n ${{ env.KUBE_NAMESPACE }} --timeout=600s
           
-          echo " Application deployed successfully"
+          # Clean up temporary file
+          rm -f k8s/deployment-temp.yaml
+          
+          echo "Application deployed successfully"
 
       - name: Apply HPA (Horizontal Pod Autoscaler)
         run: |
           echo "=== APPLYING HPA ==="
-          kubectl apply -f k8s/hpa.yaml -n ${{ env.KUBE_NAMESPACE }}
-          kubectl get hpa -n ${{ env.KUBE_NAMESPACE }}
-          echo " HPA configured"
+          if [ -f k8s/hpa.yaml ]; then
+            kubectl apply -f k8s/hpa.yaml -n ${{ env.KUBE_NAMESPACE }}
+            kubectl get hpa -n ${{ env.KUBE_NAMESPACE }}
+            echo "HPA configured"
+          else
+            echo "No hpa.yaml found, skipping HPA configuration"
+          fi
 
       - name: Apply Ingress (if exists)
         run: |
@@ -217,27 +367,50 @@ jobs:
       - name: Verify deployment status
         run: |
           echo "=== DEPLOYMENT VERIFICATION ==="
+          
+          echo "Deployment status:"
+          kubectl get deployment customer-service-deployment -n ${{ env.KUBE_NAMESPACE }}
+          
           echo "Pods status:"
           kubectl get pods -n ${{ env.KUBE_NAMESPACE }} -l app=customer-service -o wide
           
           echo "Services status:"
           kubectl get services -n ${{ env.KUBE_NAMESPACE }} -l app=customer-service
           
-          echo "Deployment status:"
-          kubectl get deployment customer-service-deployment -n ${{ env.KUBE_NAMESPACE }}
+          echo "ReplicaSet status:"
+          kubectl get rs -n ${{ env.KUBE_NAMESPACE }} -l app=customer-service
           
           echo "Recent events:"
-          kubectl get events -n ${{ env.KUBE_NAMESPACE }} --sort-by='.lastTimestamp' | tail -10
+          kubectl get events -n ${{ env.KUBE_NAMESPACE }} --sort-by='.lastTimestamp' | tail -15
+          
+          # Check if pods are running
+          RUNNING_PODS=$(kubectl get pods -n ${{ env.KUBE_NAMESPACE }} -l app=customer-service --field-selector=status.phase=Running --no-headers | wc -l)
+          echo "Running pods: $RUNNING_PODS"
+          
+          if [ "$RUNNING_PODS" -gt 0 ]; then
+            echo "Deployment verification successful"
+          else
+            echo "No pods are running yet, checking pod logs..."
+            kubectl describe pods -n ${{ env.KUBE_NAMESPACE }} -l app=customer-service
+          fi
 
       - name: Get service endpoint
         run: |
           echo "=== SERVICE ENDPOINT ==="
+          
+          # Wait for LoadBalancer to get an external IP (max 5 minutes)
+          echo "Waiting for LoadBalancer external IP..."
+          timeout 300 bash -c 'until kubectl get service customer-service-service -n ${{ env.KUBE_NAMESPACE }} -o jsonpath="{.status.loadBalancer.ingress[0].hostname}" | grep -q "."; do echo "Waiting for external IP..."; sleep 15; done' || echo "LoadBalancer IP still pending"
+          
           ENDPOINT=$(kubectl get service customer-service-service -n ${{ env.KUBE_NAMESPACE }} -o jsonpath='{.status.loadBalancer.ingress[0].hostname}' 2>/dev/null || echo "pending")
+          
           if [ "$ENDPOINT" != "pending" ] && [ "$ENDPOINT" != "" ]; then
-            echo " Service endpoint: http://$ENDPOINT"
+            echo "Service endpoint: http://$ENDPOINT"
             echo "service-endpoint=$ENDPOINT" >> $GITHUB_OUTPUT
           else
             echo " LoadBalancer endpoint is still pending..."
             kubectl describe service customer-service-service -n ${{ env.KUBE_NAMESPACE }}
+            echo "Note: It may take several minutes for the LoadBalancer to provision"
           fi
+          
           echo "=== DEPLOYMENT COMPLETED ==="
