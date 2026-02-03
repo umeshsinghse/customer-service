@@ -5,15 +5,24 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>com.example</groupId>
-        <artifactId>ecommerce-legacy-migration</artifactId>
-        <version>1.0.0-SNAPSHOT</version>
-        <relativePath>../pom.xml</relativePath>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.2.1</version>
+        <relativePath/>
     </parent>
 
+    <groupId>com.example</groupId>
     <artifactId>customer-service</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
     <name>customer-service</name>
     <description>Minimal Spring Boot Customer Service API</description>
+    <packaging>jar</packaging>
+
+    <properties>
+        <java.version>17</java.version>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+    </properties>
 
 
     <dependencies>
