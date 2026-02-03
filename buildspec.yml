@@ -1,7 +1,76 @@
+version: 0.2
+
+env:
+  variables:
+    BUILD_ENV: "development"
+    APP_NAME: "customer-service"
+    JAVA_VERSION: "17"
+
 phases:
+  install:
+    runtime-versions:
+      java: corretto17
+    commands:
+      - echo "=== INSTALL PHASE STARTED ==="
+      - echo "Build environment: $BUILD_ENV"
+      - echo "Application name: $APP_NAME"
+      - echo "Java version: $JAVA_VERSION"
+      - echo "CodeBuild region: $AWS_DEFAULT_REGION"
+      - echo "Build ID: $CODEBUILD_BUILD_ID"
+      - echo "Installing Java and Maven..."
+      - java -version
+      - mvn -version
+      - echo "=== INSTALL PHASE COMPLETED ==="
+
   pre_build:
     commands:
-      - echo "SOURCE LOCATION:"
-      - echo "$CODEBUILD_SOURCE_LOCATION"
-      - echo "WEBHOOK SOURCE LOCATION:"
-      - echo "$CODEBUILD_DEFAULT_WEBHOOK_SOURCE_LOCATION"
+      - echo "=== PRE-BUILD PHASE STARTED ==="
+      - echo "Current directory: $(pwd)"
+      - echo "Listing project files:"
+      - ls -la
+      - echo "Checking Maven dependencies..."
+      - mvn dependency:resolve
+      - echo "Environment variables:"
+      - printenv | grep -E "(CODEBUILD|AWS|JAVA)" | head -10
+      - echo "=== PRE-BUILD PHASE COMPLETED ==="
+
+  build:
+    commands:
+      - echo "=== BUILD PHASE STARTED ==="
+      - echo "Starting build process at $(date)"
+      - echo "Step 1: Running tests..."
+      - mvn clean test
+      - echo "Step 2: Compiling application..."
+      - mvn compile
+      - echo "Step 3: Packaging JAR..."
+      - mvn package -DskipTests
+      - echo "Build artifacts created:"
+      - ls -la target/
+      - echo "Build completed successfully at $(date)"
+      - echo "=== BUILD PHASE COMPLETED ==="
+
+  post_build:
+    commands:
+      - echo "=== POST-BUILD PHASE STARTED ==="
+      - echo "Build status: $CODEBUILD_BUILD_SUCCEEDING"
+      - |
+        if [ "$CODEBUILD_BUILD_SUCCEEDING" = "1" ]; then
+          echo "✅ Build succeeded!"
+          echo "JAR file details:"
+          ls -lh target/*.jar
+        else
+          echo "❌ Build failed!"
+          echo "Check logs above for errors"
+        fi
+      - echo "Cleaning up temporary files..."
+      - echo "=== POST-BUILD PHASE COMPLETED ==="
+
+artifacts:
+  files:
+    - 'target/*.jar'
+    - 'target/classes/**/*'
+  name: $APP_NAME-$(date +%Y%m%d-%H%M%S)
+
+cache:
+  paths:
+    - '/root/.m2/**/*'
