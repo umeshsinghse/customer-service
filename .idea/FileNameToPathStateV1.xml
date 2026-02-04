@@ -3,6 +3,160 @@
   <component name="FileNameToPathState">
     <option name="fileNameToPathMap">
       <map>
+        <entry key=".github/workflows/ci-cd.yml Lines(1-246)">
+          <value>
+            <list>
+              <option value="$PROJECT_DIR$/.github/workflows/ci-cd.yml" />
+            </list>
+          </value>
+        </entry>
+        <entry key=".slingshot/prompts/sample.prompt.md Lines(1-35)">
+          <value>
+            <list>
+              <option value="$PROJECT_DIR$/.slingshot/prompts/sample.prompt.md" />
+            </list>
+          </value>
+        </entry>
+        <entry key="Dockerfile Lines(1-14)">
+          <value>
+            <list>
+              <option value="$PROJECT_DIR$/Dockerfile" />
+            </list>
+          </value>
+        </entry>
+        <entry key="README-CICD.md Lines(1-344)">
+          <value>
+            <list>
+              <option value="$PROJECT_DIR$/README-CICD.md" />
+            </list>
+          </value>
+        </entry>
+        <entry key="README.md Lines(1-118)">
+          <value>
+            <list>
+              <option value="$PROJECT_DIR$/README.md" />
+              <option value="$PROJECT_DIR$/terraform/modules/ecr/README.md" />
+              <option value="$PROJECT_DIR$/terraform/modules/ecr/README.md" />
+            </list>
+          </value>
+        </entry>
+        <entry key="buildspec-production.yml Lines(1-157)">
+          <value>
+            <list>
+              <option value="$PROJECT_DIR$/buildspec-production.yml" />
+            </list>
+          </value>
+        </entry>
+        <entry key="buildspec-staging.yml Lines(1-80)">
+          <value>
+            <list>
+              <option value="$PROJECT_DIR$/buildspec-staging.yml" />
+            </list>
+          </value>
+        </entry>
+        <entry key="buildspec.yml Lines(1-72)">
+          <value>
+            <list>
+              <option value="$PROJECT_DIR$/buildspec.yml" />
+            </list>
+          </value>
+        </entry>
+        <entry key="controller/CustomerController.java Lines(1-93)">
+          <value>
+            <list>
+              <option value="$PROJECT_DIR$/src/main/java/com/ps/cs/controller/CustomerController.java" />
+            </list>
+          </value>
+        </entry>
+        <entry key="customer-service/deployment-troubleshooting-guide.md Lines(1-208)">
+          <value>
+            <list>
+              <option value="$PROJECT_DIR$/deployment-troubleshooting-guide.md" />
+              <option value="$PROJECT_DIR$/deployment-troubleshooting-guide.md" />
+              <option value="$PROJECT_DIR$/deployment-troubleshooting-guide.md" />
+            </list>
+          </value>
+        </entry>
+        <entry key="deployment-fix-guide.md Lines(1-120)">
+          <value>
+            <list>
+              <option value="$PROJECT_DIR$/deployment-fix-guide.md" />
+            </list>
+          </value>
+        </entry>
+        <entry key="deployment-troubleshooting-guide.md Lines(1-208)">
+          <value>
+            <list>
+              <option value="$PROJECT_DIR$/deployment-troubleshooting-guide.md" />
+            </list>
+          </value>
+        </entry>
+        <entry key="docker-compose.yml Lines(1-6)">
+          <value>
+            <list>
+              <option value="$PROJECT_DIR$/docker-compose.yml" />
+            </list>
+          </value>
+        </entry>
+        <entry key="ecr/README.md Lines(241-241)">
+          <value>
+            <list>
+              <option value="$PROJECT_DIR$/terraform/modules/ecr/README.md" />
+              <option value="$PROJECT_DIR$/terraform/modules/ecr/README.md" />
+            </list>
+          </value>
+        </entry>
+        <entry key="example/customer/Customer.java Lines(1-56)">
+          <value>
+            <list>
+              <option value="$PROJECT_DIR$/src/main/java/com/example/customer/Customer.java" />
+              <option value="$PROJECT_DIR$/src/main/java/com/example/customer/Customer.java" />
+              <option value="$PROJECT_DIR$/src/main/java/com/example/customer/Customer.java" />
+              <option value="$PROJECT_DIR$/src/main/java/com/example/customer/Customer.java" />
+              <option value="$PROJECT_DIR$/src/main/java/com/example/customer/Customer.java" />
+            </list>
+          </value>
+        </entry>
+        <entry key="example/customer/CustomerApplication.java Lines(1-16)">
+          <value>
+            <list>
+              <option value="$PROJECT_DIR$/src/main/java/com/example/customer/CustomerApplication.java" />
+              <option value="$PROJECT_DIR$/src/main/java/com/example/customer/CustomerApplication.java" />
+              <option value="$PROJECT_DIR$/src/main/java/com/example/customer/CustomerApplication.java" />
+              <option value="$PROJECT_DIR$/src/main/java/com/example/customer/CustomerApplication.java" />
+              <option value="$PROJECT_DIR$/src/main/java/com/example/customer/CustomerApplication.java" />
+            </list>
+          </value>
+        </entry>
+        <entry key="example/customer/CustomerController.java Lines(1-46)">
+          <value>
+            <list>
+              <option value="$PROJECT_DIR$/src/main/java/com/example/customer/CustomerController.java" />
+              <option value="$PROJECT_DIR$/src/main/java/com/example/customer/CustomerController.java" />
+              <option value="$PROJECT_DIR$/src/main/java/com/example/customer/CustomerController.java" />
+              <option value="$PROJECT_DIR$/src/main/java/com/example/customer/CustomerController.java" />
+              <option value="$PROJECT_DIR$/src/main/java/com/example/customer/CustomerController.java" />
+            </list>
+          </value>
+        </entry>
+        <entry key="example/customer/CustomerService.java Lines(1-41)">
+          <value>
+            <list>
+              <option value="$PROJECT_DIR$/src/main/java/com/example/customer/CustomerService.java" />
+              <option value="$PROJECT_DIR$/src/main/java/com/example/customer/CustomerService.java" />
+              <option value="$PROJECT_DIR$/src/main/java/com/example/customer/CustomerService.java" />
+              <option value="$PROJECT_DIR$/src/main/java/com/example/customer/CustomerService.java" />
+              <option value="$PROJECT_DIR$/src/main/java/com/example/customer/CustomerService.java" />
+            </list>
+          </value>
+        </entry>
+        <entry key="fix-eks-auth.md Lines(1-215)">
+          <value>
+            <list>
+              <option value="$PROJECT_DIR$/fix-eks-auth.md" />
+            </list>
+          </value>
+        </entry>
         <entry key="k8s/configmap.yaml Lines(1-38)">
           <value>
             <list>
@@ -21,9 +175,63 @@
             </list>
           </value>
         </entry>
+        <entry key="k8s/deployment.yaml Lines(1-85)">
+          <value>
+            <list>
+              <option value="$PROJECT_DIR$/k8s/deployment.yaml" />
+              <option value="$PROJECT_DIR$/k8s/deployment.yaml" />
+            </list>
+          </value>
+        </entry>
+        <entry key="main/resources/application.properties Lines(1-27)">
+          <value>
+            <list>
+              <option value="$PROJECT_DIR$/src/main/resources/application.properties" />
+              <option value="$PROJECT_DIR$/src/main/resources/application.properties" />
+            </list>
+          </value>
+        </entry>
+        <entry key="modules/ecr/README.md Lines(1-255)">
+          <value>
+            <list>
+              <option value="$PROJECT_DIR$/terraform/modules/ecr/README.md" />
+              <option value="$PROJECT_DIR$/terraform/modules/ecr/README.md" />
+            </list>
+          </value>
+        </entry>
+        <entry key="pom.xml Lines(1-57)">
+          <value>
+            <list>
+              <option value="$PROJECT_DIR$/pom.xml" />
+            </list>
+          </value>
+        </entry>
+        <entry key="target/customer-service-1.0.0-SNAPSHOT.jar.original Lines(1-56)">
+          <value>
+            <list>
+              <option value="$PROJECT_DIR$/target/customer-service-1.0.0-SNAPSHOT.jar.original" />
+            </list>
+          </value>
+        </entry>
         <entry key="workflows/ci-cd.yml Lines(1-243)">
           <value>
             <list>
+              <option value="$PROJECT_DIR$/.github/workflows/ci-cd.yml" />
+              <option value="$PROJECT_DIR$/.github/workflows/ci-cd.yml" />
+              <option value="$PROJECT_DIR$/.github/workflows/ci-cd.yml" />
+              <option value="$PROJECT_DIR$/.github/workflows/ci-cd.yml" />
+              <option value="$PROJECT_DIR$/.github/workflows/ci-cd.yml" />
+              <option value="$PROJECT_DIR$/.github/workflows/ci-cd.yml" />
+            </list>
+          </value>
+        </entry>
+        <entry key="workflows/ci-cd.yml Lines(1-246)">
+          <value>
+            <list>
+              <option value="$PROJECT_DIR$/.github/workflows/ci-cd.yml" />
+              <option value="$PROJECT_DIR$/.github/workflows/ci-cd.yml" />
+              <option value="$PROJECT_DIR$/.github/workflows/ci-cd.yml" />
+              <option value="$PROJECT_DIR$/.github/workflows/ci-cd.yml" />
               <option value="$PROJECT_DIR$/.github/workflows/ci-cd.yml" />
               <option value="$PROJECT_DIR$/.github/workflows/ci-cd.yml" />
               <option value="$PROJECT_DIR$/.github/workflows/ci-cd.yml" />
